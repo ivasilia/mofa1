@@ -1,6 +1,6 @@
 # mofa
 
-To fill the repositories with sample data, uncomment the contents of the main method in ApplicationInit.java
+Functionality available for Collections(Departments), Items, Users, Projects. To fill the repositories with sample data, uncomment contents of the main method in ApplicationInit.java
 --------------------------------------------------------------------------------------------------------
 
 UNAUTHORIZED users can:

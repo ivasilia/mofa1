@@ -1,6 +1,6 @@
 # mofa
 
-To fill the repositories with sample data, uncomment the contents of the main method in Application.init.
+To fill the repositories with sample data, uncomment the contents of the main method in ApplicationInit.java
 --------------------------------------------------------------------------------------------------------
 
 UNAUTHORIZED users can:

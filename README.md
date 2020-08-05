@@ -1,4 +1,4 @@
-# mofa
+# mofa - Museum Of Fine Arts
 
 Functionality available for Collections(Departments), Items, Users, Projects. To fill the repositories with sample data, uncomment contents of the main method in ApplicationInit.java
 --------------------------------------------------------------------------------------------------------

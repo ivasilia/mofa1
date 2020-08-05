@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MOFA - Admin Panel </title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+
+<script>
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "earlymusic-bg.org/files/lipsum.txt", true);
+        xhttp.send();
+    }
+</script>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <th:block th:include="/fragments/nav-admin"></th:block>
+</nav>
+<div class="container text-center">
+    <div class="row">
+        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded" style="background-color: #c1eaf1; margin-right: 20px">
+            <h5 class="text-primary">MOFA app statistics<br>
+            (StatsInterceptor)</h5>
+            <div class="list-group-item rounded" style="border-color:  #0d8499">
+                <ul>
+                    <li th:text="|Request count: ${requestCount}|"></li>
+                    <br>
+                    <li th:text="|Application started on: ${startedOn}|"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded" style="background-color: #c1eaf1">
+            <h5 class="text-primary">MOFA users' statistics</h5>
+            <div class="list-group-item rounded" style="border-color:  #0d8499;">
+                <ul>
+                    <li th:text="|Total users: ${usersCount}|"></li>
+                    <br>
+                    <li th:text="|Total active users: ${activeUsers}|"></li>
+                    <br>
+                    <li th:text="|Total users with collected items: ${usersWithItems}|"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded" style="background-color: #c1eaf1; margin-right: 20px">
+            <h5 class="text-primary">MOFA page statistics<br>
+            (PathInterceptor)</h5>
+            <div class="list-group-item rounded" style="border-color:  #0d8499">
+                <ul>
+                    <li th:text="|Projects page viewed ${requestsToProjectsCount} times|"></li>
+                    <br>
+                    <li th:text="|Items viewed ${requestsToItemsCount} times|"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded" style="background-color: #c1eaf1; margin-right: 20px">
+            <div id="demo">
+                <h5 class="text-primary">AJAX Object</h5>
+                <button type="button" onclick="loadDoc()">Toggle content</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MOFA Admin User's Management Page - User update</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <th:block th:include="/fragments/nav-admin"></th:block>
+</nav>
+<div class="container">
+    <div class="row">
+        <h5 class="text-primary text-center col-12" style="margin-bottom: 10px"
+            th:text="|Confirm giving Curator's permissions to user ${entity.username}|"></h5>
+    </div>
+    <div class="row">
+        <form th:action="@{/admin/users/curator}" th:method="POST">
+            <button type="submit" th:name="id" th:value="${entity.getId()}">Confirm</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

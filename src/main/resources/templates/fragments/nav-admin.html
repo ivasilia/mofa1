@@ -1,0 +1,28 @@
+<div class="collapse navbar-collapse">
+    <a class="navbar-brand" style="font-family: Algerian, serif; font-size: x-large" th:href="@{/admin}">MOFA Admin
+        Panel</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+            aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/admin/items}">View Items</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/admin/items/add}">Add Item</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Messaging</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/admin/users}">Users management</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/_leaving" tabindex="-1" aria-disabled="true">Logout</a>
+        </li>
+    </ul>
+    <form class="form-inline my-2 my-md-0">
+        <input class="form-control" type="text" placeholder="Search">
+    </form>
+</div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>MUSEUM OF FINE ARTS</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+
+<th:block th:include="/fragments/featured"></th:block>
+
+<div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <th:block th:include="/fragments/nav"></th:block>
+    </nav>
+</div>
+
+<div class="container-fluid" style="padding-top: 10px">
+    <div class="row">
+        <h4 class="bg-light w-100 text-center" style="color: #36384c; font-family: 'Britannic Bold', serif">Browse our Collections online</h4>
+    </div>
+    <!-- Collections -->
+    <div class="row justify-content-center">
+        <div th:each="c : ${collections}" class="card-group">
+            <div class="card" style="width: 18rem; padding: 3px; border-top-color: #849974">
+                <img class="card-img-top img-thumbnail" th:src="*{c.imageUrl}" alt="Cover Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="*{c.name}">...</h5>
+                    <p class="card-text" th:text="*{c.description}">...</p>
+                    <a sec:authorize="hasRole('ROLE_USER')" class="btn" style="background-color: #849974; color: #fff"
+                       th:href="@{collections/show/{id}(id=${c.id})}">View Collection</a><br>
+                    <a sec:authorize="hasRole('ROLE_CURATOR')" class="btn" style="background-color: #849974; color: #fff; margin-top: 20px"
+                       th:href="@{collections/show/{id}(id=${c.id})}">Edit Collection</a><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- EO Collections   -->
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>MOFA - Item View</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <th:block th:include="/fragments/nav"></th:block>
+</nav>
+<div class="container-fluid text-center" th:object="${item}">
+    <div class="row d-inline-block rounded-box">
+        <h4 th:text="*{name}"></h4>
+        <h5 th:text="*{getAuthor()}"></h5>
+    </div>
+    <div class="row d-inline-block" style="padding: 20px">
+        <div class="col-lg-8 col-md-10 col-sm-8 d-inline-block">
+        <img th:src="*{imageUrl}" class="img-fluid">
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-12">
+            <button type="button" class="btn-outline-primary rounded">
+                <a th:href="@{/collections/show/{id}(id=${item.departmentId})}">Back to collection</a></button>
+        </div>
+    </div>
+
+    <div sec:authorize="hasRole('ROLE_CURATOR') and hasRole('ROLE_USER')">
+
+        <form th:method="POST" th:action="@{/items/show/{id}(id=${id})}" style="margin-top: 30px">
+
+            <label for="notes-text">Please write your valuable notes here: </label><br>
+            <textarea type="text" class="form-control col-lg-10" id="notes-text" style="min-height: 20em"
+                      th:name="text"></textarea><br>
+
+            <label for="author">Author's username</label>
+            <input type="text" th:placeholder="${#request.userPrincipal.name}" id="author">
+
+            <div class="button-holder d-flex justify-content-center" style="padding-top: 20px">
+                <button type="submit" class="btn btn-secondary mb-3">Submit</button>
+            </div>
+        </form>
+    </div>
+    <!-- TODO Curator -> set Item status, set Department   -->
+
+</div>
+</body>
+</html>

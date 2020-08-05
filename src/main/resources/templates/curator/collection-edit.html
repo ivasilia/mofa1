@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>MOFA - Collection View</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <th:block th:include="/fragments/nav"></th:block>
+</nav>
+<h4 style="text-align: center; margin-top: 20px" th:text="|Collection Management - ${departmentServiceModel.name}|"></h4>
+
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-12">
+            <form th:action="@{/curator/collection/{id}(id=${id})}" method="POST" th:object="${departmentServiceModel}" style="margin-bottom: 30px">
+                <button type="submit" class="btn" style="background-color: #849974; color: #fff; margin-bottom: 10px">
+                    Add an item to collection</button><br>
+                <select id="name" th:field="*{name}">
+                    <option value="">-- Available items --</option>
+                    <option th:each="item : ${allItems}"
+                            th:value="${item.getName()}"
+                            th:text="|${item.getName()} : by ${item.getAuthor()}|"></option>
+                </select>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row" style="display: inline-block">
+        <table class="table table-responsive-md">
+            <tr th:each="i : ${departmentServiceModel.getItems()}">
+                <td>
+                    <img class="img-thumbnail"  th:src="${i.imageUrl}" style="max-width: 200px" th:alt="${i.getName()}">
+                </td>
+                <td>
+                    <h5 class="card-title text-primary" th:text="${i.name}">...</h5>
+                </td>
+                <td>
+                    <h5 class="card-text" th:text="${i.getAuthor()}">...</h5>
+                </td>
+                <td>
+                    <a class="btn" style="background-color: #849974; color: #fff"
+                       th:href="@{/items/show/{id}(id=${i.id})}">View Item</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

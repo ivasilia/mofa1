@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+<th:block th:include="/fragments/featured"></th:block>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <th:block th:include="/fragments/nav"></th:block>
+</nav>
+</body>
+<div class="container-fluid text-center">
+    <div class="row rounded-box justify-content-center d-inline-block">
+        <form th:action="@{/register}" th:method="POST" th:object="${userRegisterBinding}"><br>
+            <small th:each="err : ${#fields.errors('firstName')}" th:text="${err}"></small><br>
+            <input type="text" th:field="*{firstName}" placeholder="First name" class="input-field"><br>
+
+            <small th:each="err : ${#fields.errors('lastName')}" th:text="${err}"></small><br>
+            <input type="text" th:field="*{lastName}" placeholder="Last name" class="input-field"><br>
+
+            <small th:each="err : ${#fields.errors('username')}" th:text="${err}"></small><br>
+            <input type="text" th:field="*{username}" placeholder="User name" class="input-field"><br>
+
+            <small th:each="err : ${#fields.errors('email')}" th:text="${err}"></small><br>
+            <input type="text" th:field="*{email}" placeholder="Email" class="input-field"><br>
+
+            <small th:each="err : ${#fields.errors('password')}" th:text="${err}"></small><br>
+            <input type="text" th:field="*{password}" placeholder="Password" class="input-field"><br>
+            <input type="text" th:field="*{confirmPassword}" placeholder="Confirm password" class="input-field">
+            <div class="button-holder d-flex justify-content-center" style="padding-top: 20px">
+                <button type="submit" class="btn btn-secondary mb-3">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</html>

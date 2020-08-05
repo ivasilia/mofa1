@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MOFA Admin Items Management Page</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <th:block th:include="/fragments/nav-admin"></th:block>
+</nav>
+<div class="container">
+    <div class="row">
+        <h5 class="text-primary" style="margin-bottom: 10px">MOFA Admin Items Management Page</h5>
+        <table class="table table-responsive-md table-bordered">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Collection</th>
+                <th>Registration date</th>
+                <th>Status</th>
+                <th>Rating</th>
+            </tr>
+            <tr th:each="i : ${allItems}">
+                <td th:text="*{i.imageUrl}"></td>
+                <td th:text="*{i.name}"></td>
+                <td th:text="*{i.author}"></td>
+                <td th:text="*{i.description}"></td>
+                <td th:text="*{i.getDepartmentId()}"></td>
+                <td th:text="*{i.registeredOn}"></td>
+                <td th:text="*{i.status.name()}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

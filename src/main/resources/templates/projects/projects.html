@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>MUSEUM OF FINE ARTS - Projects</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+
+<th:block th:include="/fragments/featured"></th:block>
+
+<div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <th:block th:include="/fragments/nav"></th:block>
+    </nav>
+</div>
+
+<div class="container-fluid" style="padding-top: 10px">
+    <div class="row">
+        <h4 class="bg-light w-100 text-center" style="color: #36384c; font-family: 'Britannic Bold', serif">View MOFA's Projects</h4>
+        <div class="col-8 align-content-center">
+            Curator can add Items to Projects.<br>
+            When assigning a new project ID to an Item, the previous one is deleted.<br>
+            In other words, an Item can participate in only one Project at a time.
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="row justify-content-center" style="margin-top: 20px">
+        <div th:each="p : ${projects}" class="card-group">
+            <div class="card" style="width: 18rem; padding: 3px; border-top-color: #849974">
+                <img class="card-img-top img-thumbnail" th:src="*{p.imageUrl}" alt="Cover Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="*{p.name}">...</h5>
+                    <p class="card-text" th:text="*{p.description}">...</p>
+                    <a sec:authorize="isAnonymous()" class="btn" style="background-color: #849974; color: #fff"
+                       th:href="@{projects/show/{id}(id=${p.id})}">View Project</a><br>
+                    <a sec:authorize="hasRole('ROLE_CURATOR')" class="btn" style="background-color: #849974; color: #fff"
+                       th:href="@{projects/show/{id}(id=${p.id})}">Edit Project</a><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Projects   -->
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+Lunchone on the Grass: Edouard Manet: FR: /images/manet-luncheon.jpg
+A Peasant Family: Pavel Filonov: RU: /images/filonov-peasant-family.jpg
+The Burning of the Houses of Lords and Commons: William Turner: EN: /images/turner-burning.jpg
+Night Watch: Rembrandt van Rijn: DFL: /images/night-watch.jpg
+View of Toledo: El Greco: SP: /images/elgreco-toledo.jpg
+Miracle of the Slave: Tintoretto: IT: /images/miracle-tintoretto.jpg
+Gypsy Woman: Vladimir Dimitrov The Master: BAL: /images/maistora-gypsy-woman.jpg
+Dance: Henri Matisse: FR: /images/matisse-dance.jpg
+Mont Saint-Victoire: Paul Cezanne: FR: /images/cezanne.jpg
+Zaporozhtsy: Ilya Repin: RU: /images/repin-zaporozhtsy.jpg
+Wedding Dance: Pieter Breughel: DFL: /images/wedding-dance.jpg
+The Girl With A Red Hat: Johannes Vermeer Van Delft: DFL: /images/vermeer-girl.jpg
+Gold Rhyton, Thrace: Anonymous: BAL: /images/rhyton.jpg
+Queen's porcelain: Anonymous: RU: /images/porcelain.jpg
+Portrait of Alexei Michailovich Romanov: Anonymous: RU: /images/romanov.jpg
+Black Rug (Isfahan): Anonymous: MAP: /images/isfahan_black_rug.jpg
+Blueback Rug (Isfahan): Anonymous: MAP: /images/isfahan-blueback-rug.jpg
+White Rug (Isfahan): Anonymous: MAP: /images/isfahan_white_rug.jpg
+Persian Dagger: Bai Moustafa School: MAP: /images/persian-dagger.jpg
+Prince Balthazar and a Dwarf: Diego Velazquez: SP: /images/prince-balthasar-velazquez.png
+Persian Rug: By Anyone: MAP: /images/rug.png
+Tebriz Carpet: Chousrou Dynasty: MAP: /images/tebriz-carpet.jpg
+Apokalypse: Zlatio Boiadzhiev: BAL: /images/apokalypse.jpg

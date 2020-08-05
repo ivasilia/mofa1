@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MOFA Admin User's Management Page - User update</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <th:block th:include="/fragments/nav-admin"></th:block>
+</nav>
+<div class="container">
+    <div class="row">
+        <h5 class="text-primary text-center col-12" style="margin-bottom: 10px" > ITEM REGISTRATION FORM</h5>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <form th:action="@{/admin/items/add}" th:method="POST" th:object="${itemAddBinding}" class="form-group">
+
+                <label for="name">Name</label><br>
+                <small th:each="err : ${#fields.errors('name')}" th:text="${err}" class="alert-danger"></small><br>
+                <input id="name" class="form-control" type="text" th:field="*{name}"><br>
+
+                <label for="author">Author</label><br>
+                <small th:each="err : ${#fields.errors('author')}" th:text="${err}" class="alert-danger"></small><br>
+                <input id="author" class="form-control" type="text" th:field="*{author}"><br>
+
+                <label for="description">Description</label><br>
+                <small th:each="err : ${#fields.errors('description')}" th:text="${err}"></small><br>
+                <input id="description" class="form-control" type="text" th:field="*{description}"><br>
+
+                <label for="imageUrl">Image url</label><br>
+                <small th:each="err : ${#fields.errors('imageUrl')}" th:text="${err}" class="alert-danger"></small><br>
+                <input id="imageUrl" class="form-control" type="text" th:field="*{imageUrl}"><br>
+
+                <label for="departmentId">Department</label><br>
+                <small th:each="err : ${#fields.errors('departmentId')}" th:text="${err}"></small><br>
+                <input id="departmentId" class="form-control" type="text" th:field="*{departmentId}"><br>
+
+                <button type="submit" class="btn-outline-primary rounded">Register Item</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

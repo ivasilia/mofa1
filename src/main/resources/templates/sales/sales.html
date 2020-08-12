@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>MUSEUM OF FINE ARTS</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+
+<th:block th:include="/fragments/featured"></th:block>
+
+<div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <th:block th:include="/fragments/nav"></th:block>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12 d-inline-block">
+            <h5 class="text-primary">Don't forget to buy tickets for your visit!</h5>
+            <form th:action="@{/sales}" th:method="POST">
+                <input type="text" th:name="numberOfTickets" placeholder="Enter number of tickets here ..."><br>
+                <select id="type" th:name="type">
+                    <option th:each="t : ${T(softuni.ivasi.mofa.sales.models.entity.TicketType).values()}"
+                            th:value="${t}"
+                            th:text="${t}">
+                    </option>
+                </select><br>
+                <button type="submit" class="btn-outline-primary rounded">Buy tickets</button>
+            </form>
+            <div style="margin-top: 30px">
+                <div th:each="ticket : ${soldTickets}"
+                     th:text="|Successfully bought ticket: ${ticket.getTicketType()}
+                     Price: ${ticket.getPrice()}, ticket ID: ${ticket.id}|"
+                     class="col-12 bg-success text-light">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

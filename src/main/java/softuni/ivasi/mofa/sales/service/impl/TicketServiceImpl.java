@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Service
 public class TicketServiceImpl implements TicketService {
 
-
     @Override
     public BigDecimal sold() {
         return null;

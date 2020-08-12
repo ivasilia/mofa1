@@ -18,5 +18,9 @@ public interface ProjectService {
 
     List<ProjectServiceModel> getAll();
 
+    void save(Project project);
+
+    Project getEntityByName(String name);
+
 //    BigDecimal calculatePrice(String venueId, String itemId, String projectId);
 }

@@ -12,4 +12,6 @@ public interface DepartmentRepo extends JpaRepository<Department, String> {
     Optional<Department> findByAbbreviation(String abbreviation);
 
     List<Department> findByIdIsNot(String id);
+
+    Department findByName(String name);
 }

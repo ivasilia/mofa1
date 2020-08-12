@@ -19,4 +19,6 @@ public interface DepartmentService {
     Department getByAbbreviation(String s);
 
     List<String> findByDepartmentIdIsNot(String id);
+
+    void save(Department dept1);
 }

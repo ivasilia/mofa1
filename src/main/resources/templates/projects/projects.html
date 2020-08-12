@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="*{p.name}">...</h5>
                     <p class="card-text" th:text="*{p.description}">...</p>
-                    <a sec:authorize="isAnonymous()" class="btn" style="background-color: #849974; color: #fff"
+                    <a sec:authorize="hasRole('ROLE_USER')" class="btn" style="background-color: #849974; color: #fff"
                        th:href="@{projects/show/{id}(id=${p.id})}">View Project</a><br>
                     <a sec:authorize="hasRole('ROLE_CURATOR')" class="btn" style="background-color: #849974; color: #fff"
                        th:href="@{projects/show/{id}(id=${p.id})}">Edit Project</a><br>

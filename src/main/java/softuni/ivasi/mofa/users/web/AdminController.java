@@ -79,7 +79,7 @@ public class AdminController {
 
     //  -- CURATOR MANAGEMENT --  //
 
-    @GetMapping("/users/curator")
+    @GetMapping("/users/curator/")
     public String getCurator(@RequestParam("id") String id, Model model) {
         model.addAttribute("entity", this.userService.findById(id));
         return "/admin/set-curator";

@@ -7,4 +7,5 @@ import softuni.ivasi.mofa.collections.models.entities.Notes;
 @Repository
 public interface NotesRepo extends JpaRepository<Notes, String> {
     Notes findByAuthor(String author);
+    Notes findByItemId(String itemId);
 }

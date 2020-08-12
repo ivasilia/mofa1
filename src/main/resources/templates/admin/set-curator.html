@@ -14,10 +14,14 @@
         <h5 class="text-primary text-center col-12" style="margin-bottom: 10px"
             th:text="|Confirm giving Curator's permissions to user ${entity.username}|"></h5>
     </div>
-    <div class="row">
-        <form th:action="@{/admin/users/curator}" th:method="POST">
-            <button type="submit" th:name="id" th:value="${entity.getId()}">Confirm</button>
-        </form>
+    <div class="row text-center">
+        <div class="col-12 d-inline-block">
+            <form th:action="@{/admin/users/curator}" th:method="POST">
+                <button type="submit" class="btn-outline-primary rounded"
+                        th:name="id"
+                        th:value="${entity.getId()}">Confirm</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

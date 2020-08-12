@@ -2,6 +2,7 @@ package softuni.ivasi.mofa.collections.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.entities.Department;
@@ -31,7 +32,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void initialize() throws IOException {
         InputStream resource = new ClassPathResource(
-                "files/departments.txt").getInputStream();
+                "files/departments.txt")
+                .getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
         String line = reader.readLine();
         while (line != null) {
@@ -45,10 +47,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getByName(String name) {
-        return null;
+        return this.departmentRepo.findByName(name);
     }
 
     @Override
+    @Cacheable("allDepartments")
     public List<Department> findAll() {
         return this.departmentRepo.findAll();
     }
@@ -76,6 +79,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         return this.departmentRepo.findByIdIsNot(id).stream()
                 .map(department -> department.getId())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void save(Department dept) {
+        this.departmentRepo.save(dept);
     }
 }
 

@@ -2,6 +2,7 @@ package softuni.ivasi.mofa.projects.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.entities.Item;
@@ -43,7 +44,8 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void initializeProjects() throws IOException {
         InputStream resource = new ClassPathResource(
-                "/files/projects.txt").getInputStream();
+                "files/projects.txt")
+                .getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
         String line = reader.readLine();
 
@@ -71,11 +73,22 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Cacheable("allProjects")
     public List<ProjectServiceModel> getAll() {
         return this.projectRepo.findAll().stream()
                 .map(p -> this.modelMapper.map(
                         p, ProjectServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void save(Project project) {
+        this.projectRepo.save(project);
+    }
+
+    @Override
+    public Project getEntityByName(String name) {
+        return this.projectRepo.findByName(name);
     }
 
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.ivasi.mofa.collections.models.bindings.NotesAddBinding;
 import softuni.ivasi.mofa.collections.models.service.ItemServiceModel;
+import softuni.ivasi.mofa.collections.models.service.NotesServiceModel;
 import softuni.ivasi.mofa.collections.service.ItemService;
 import softuni.ivasi.mofa.collections.service.NotesService;
 import softuni.ivasi.mofa.users.service.UserService;
@@ -31,7 +32,17 @@ public class ItemsController {
 
     @GetMapping("/show/{id}")
     public String getById(@PathVariable("id") String id, Model model) {
+
         model.addAttribute("item", this.itemService.getById(id));
+        NotesServiceModel notes = this.notesService.getByItemId(id);
+
+        if (notes != null) {
+            model.addAttribute("notes", notes);
+            model.addAttribute("hasNotes", true);
+        } else {
+            model.addAttribute("hasNotes", false);
+        }
+
         return "/collections/item-show";
     }
 
@@ -43,11 +54,13 @@ public class ItemsController {
                                   @RequestParam(value="text") String text) {
 
         ItemServiceModel itemServiceModel = this.itemService.getById(id);
-
         NotesAddBinding notes = new NotesAddBinding(text, principal.getName(), id);
-//            this.notesService.save(notes);
-        this.itemService.saveNotesToItem(itemServiceModel, notes);
 
+//        this.notesService.save(notes);
+        this.itemService.saveNotesToItem(id, notes);
+
+        mav.addObject("notes", notes);
+        mav.addObject("hasNotes", true);
         mav.addObject("item", itemServiceModel);
         mav.setViewName("/collections/item-show");
 

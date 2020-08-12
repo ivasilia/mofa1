@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div sec:authorize="hasRole('ROLE_CURATOR') and hasRole('ROLE_USER')">
+    <div th:if="${!hasNotes}" sec:authorize="hasRole('ROLE_CURATOR') and hasRole('ROLE_USER')">
 
         <form th:method="POST" th:action="@{/items/show/{id}(id=${id})}" style="margin-top: 30px">
 
@@ -42,6 +42,12 @@
                 <button type="submit" class="btn btn-secondary mb-3">Submit</button>
             </div>
         </form>
+    </div>
+    <div th:if="${hasNotes}" style="max-width: 600px" class="d-inline-block">
+        <div class="card-body border-left border-right">
+            <h6 th:text="${notes.text}" style="margin-top: 20px">
+            </h6>
+        </div>
     </div>
     <!-- TODO Curator -> set Item status, set Department   -->
 

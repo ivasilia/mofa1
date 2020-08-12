@@ -219,4 +219,8 @@ public class UserServiceImpl implements UserService {
         this.userRepo.saveAndFlush(user);
         return saved;
     }
+
+    public void deleteAll() {
+        this.userRepo.deleteAll();
+    }
 }

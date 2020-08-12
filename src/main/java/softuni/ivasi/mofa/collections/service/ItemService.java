@@ -28,7 +28,9 @@ public interface ItemService {
 
     void save(ItemServiceModel item);
 
-    void saveNotesToItem(ItemServiceModel itemServiceModel, NotesAddBinding notes);
+    void saveEntity(Item item);
+
+    void saveNotesToItem(String id, NotesAddBinding notes);
 
     List<ItemServiceModel> getAllItemDtos();
 

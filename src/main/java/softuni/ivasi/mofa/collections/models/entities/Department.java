@@ -22,6 +22,12 @@ public class Department {     // Department is used for Collections in the templ
         this.abbreviation = abbreviation;
     }
 
+    public Department(String id, String name, String abbreviation) {
+        this.id = id;
+        this.name = name;
+        this.abbreviation = abbreviation;
+    }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")

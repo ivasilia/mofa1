@@ -2,7 +2,9 @@ package softuni.ivasi.mofa.collections.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.bindings.ItemAddBinding;
 import softuni.ivasi.mofa.collections.models.bindings.NotesAddBinding;
@@ -41,6 +43,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Scheduled(cron = "0 0 0 * * *")
     public void initialize() throws IOException {
         InputStream resource = new ClassPathResource(
                 "files/items.txt").getInputStream();
@@ -101,6 +104,7 @@ public class ItemServiceImpl implements ItemService {
 
 
     @Override
+    @Cacheable("allItems")
     public List<Item> getAllItems() {
         return this.itemRepo.findAll();
     }
@@ -115,6 +119,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Cacheable("allItemDTOs")
     public List<ItemServiceModel> getAllItemDtos() {
         return this.itemRepo.findAll().stream()
                 .map(i -> this.modelMapper.map(i, ItemServiceModel.class))
@@ -143,6 +148,11 @@ public class ItemServiceImpl implements ItemService {
                         item, Item.class));
     }
 
+    @Override
+    public void saveEntity(Item item) {
+        this.itemRepo.save(item);
+    }
+
 
     //  Operations on Items
 
@@ -153,12 +163,15 @@ public class ItemServiceImpl implements ItemService {
         this.itemRepo.saveAndFlush(item);
     }
 
-    @Override   // @Transactional
-    public void saveNotesToItem(ItemServiceModel itemServiceModel, NotesAddBinding notesAddBinding) {
+    @Override   
+    public void saveNotesToItem(String id, NotesAddBinding notesAddBinding) {
         Notes notes = this.modelMapper.map(notesAddBinding, Notes.class);
-        Item item = this.modelMapper.map(itemServiceModel, Item.class);
-        item.setNotes(notes);
-        this.itemRepo.saveAndFlush(item);
+        Item item = this.itemRepo.findById(id).orElse(null);
+        // TODO ??? Entity not found exception ???
+        if (item != null && item.getNotes() == null) {
+            item.setNotes(notes);
+            this.itemRepo.saveAndFlush(item);
+        }
     }
 
     @Override

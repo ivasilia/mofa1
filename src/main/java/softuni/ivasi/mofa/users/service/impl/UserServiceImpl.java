@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.entities.Item;
+import softuni.ivasi.mofa.collections.models.service.ItemServiceModel;
+import softuni.ivasi.mofa.collections.service.ItemService;
 import softuni.ivasi.mofa.users.models.bindings.UserRegisterBinding;
 import softuni.ivasi.mofa.users.models.bindings.UserUpdateBinding;
 import softuni.ivasi.mofa.users.models.entities.AuthorityEntity;
@@ -20,12 +22,14 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
+    private final ItemService itemService;
     private final ModelMapper modelMapper;
     private final PasswordEncoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserRepo userRepo, ModelMapper modelMapper, PasswordEncoder encoder) {
+    public UserServiceImpl(UserRepo userRepo, ItemService itemService, ModelMapper modelMapper, PasswordEncoder encoder) {
         this.userRepo = userRepo;
+        this.itemService = itemService;
         this.modelMapper = modelMapper;
         this.encoder = encoder;
     }
@@ -39,8 +43,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserServiceModel findById(String id) {
         UserEntity userEntity = this.userRepo.findById(id).orElse(null);
-        UserServiceModel user = this.modelMapper.map(
-                userEntity, UserServiceModel.class);
+        UserServiceModel user = null;
+        if (userEntity != null) {
+            user = this.modelMapper.map(
+                    userEntity, UserServiceModel.class);
+        }
         return user;
     }
 
@@ -182,10 +189,13 @@ public class UserServiceImpl implements UserService {
         this.userRepo.saveAndFlush(user);
     }
 
-    public void addItemToUser(Item item, String name) {
+    @Override
+    public void addItemToUser(String itemId, String name) {
         UserEntity user = this.userRepo.findByUsername(name).orElseThrow(() ->
                 new EntityNotFoundException("No user with such username"));
+        Item item = this.itemService.getEntityById(itemId);
         user.getItems().add(item);
+        this.userRepo.saveAndFlush(user);
     }
 
     @Override
@@ -218,6 +228,16 @@ public class UserServiceImpl implements UserService {
 
         this.userRepo.saveAndFlush(user);
         return saved;
+    }
+
+    @Override
+    public List<ItemServiceModel> getAllItems(String username) {
+        return this.userRepo.findByUsername(username).orElseThrow(() ->
+                new EntityNotFoundException("Entity not found!"))
+                .getItems()
+                .stream()
+                .map(i -> this.modelMapper.map(i, ItemServiceModel.class))
+                .collect(Collectors.toList());
     }
 
     public void deleteAll() {

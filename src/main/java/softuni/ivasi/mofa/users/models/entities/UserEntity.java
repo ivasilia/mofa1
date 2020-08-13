@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -51,8 +52,7 @@ public class UserEntity {
             fetch = FetchType.EAGER)
     private List<AuthorityEntity> authorities = new ArrayList<>();
 
-    @OneToMany
-    @JoinColumn(name = "item_id")
+    @ManyToMany(cascade = CascadeType.REFRESH)
     private Set<Item> items = new HashSet<>();
 
     private LocalDateTime registeredOn = LocalDateTime.now();

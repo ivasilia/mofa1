@@ -33,6 +33,7 @@ public class ItemsController {
     @GetMapping("/show/{id}")
     public String getById(@PathVariable("id") String id, Model model) {
 
+        model.addAttribute("userServiceModel", this.userService.findById(id));
         model.addAttribute("item", this.itemService.getById(id));
         NotesServiceModel notes = this.notesService.getByItemId(id);
 
@@ -48,7 +49,7 @@ public class ItemsController {
 
     @PreAuthorize("hasRole('ROLE_CURATOR')")
     @PostMapping("/show/{id}")
-    public ModelAndView postNotes(ModelAndView mav,
+    public ModelAndView postNotesOrAddToPrivateCollection(ModelAndView mav,
                                   Principal principal,
                                   @PathVariable("id") String id,
                                   @RequestParam(value="text") String text) {
@@ -56,7 +57,6 @@ public class ItemsController {
         ItemServiceModel itemServiceModel = this.itemService.getById(id);
         NotesAddBinding notes = new NotesAddBinding(text, principal.getName(), id);
 
-//        this.notesService.save(notes);
         this.itemService.saveNotesToItem(id, notes);
 
         mav.addObject("notes", notes);

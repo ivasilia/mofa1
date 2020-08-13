@@ -23,8 +23,14 @@
     <div class="row text-center">
         <div class="col-12">
             <button type="button" class="btn-outline-primary rounded">
-                <a th:href="@{/collections/show/{id}(id=${item.departmentId})}">Back to collection</a></button>
+                <a th:href="@{/collections/show/{id}(id=${item.departmentId})}">To Collection</a></button>
         </div>
+
+        <div sec:authorize="hasRole('ROLE_USER')" class="col-12" style="margin-top: 20px">
+            <button type="button" class="btn-outline-primary rounded">
+                <a th:href="@{/users/private-collection/{id}(id=${#authentication.getPrincipal().getUsername()})}">Add items to personal Collection</a></button>
+        </div>
+
     </div>
 
     <div th:if="${!hasNotes}" sec:authorize="hasRole('ROLE_CURATOR') and hasRole('ROLE_USER')">

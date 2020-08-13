@@ -5,10 +5,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import softuni.ivasi.mofa.collections.service.ItemService;
 import softuni.ivasi.mofa.users.models.bindings.UserUpdateBinding;
 import softuni.ivasi.mofa.users.service.UserService;
 
@@ -19,10 +18,12 @@ import java.security.Principal;
 @RequestMapping("/users")
 public class UsersController {
     private final UserService userService;
+    private final ItemService itemService;
 
     @Autowired
-    public UsersController(UserService userService) {
+    public UsersController(UserService userService, ItemService itemService) {
         this.userService = userService;
+        this.itemService = itemService;
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -40,7 +41,35 @@ public class UsersController {
         mav.addObject("userUpdateBinding", userUpdateBinding);
         mav.setViewName("/users/profile");
         mav.addObject("saved", this.userService.saveUser(userUpdateBinding));
+
         return mav;
     }
+
+    @GetMapping("/private-collection/{username}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView privateCollection(ModelAndView mav,
+                                          @PathVariable("username") String username) {
+        mav.addObject("allItems", this.itemService.getAllItemDtos());
+        mav.addObject("collectedItems", this.userService.getAllItems(username));
+        mav.addObject("username", username);
+        mav.setViewName("/users/user-private-collection");
+        return mav;
+    }
+
+    @PostMapping("/private-collection/{username}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView privateCollectionAddItem(ModelAndView mav,
+                                                 @PathVariable("username") String username,
+                                                 @RequestParam("itemId") String itemId) {
+
+        this.userService.addItemToUser(itemId, username);
+        System.out.println();
+        mav.addObject("allItems", this.itemService.getAllItemDtos());
+        mav.addObject("collectedItems", this.userService.getAllItems(username));
+        mav.addObject("username", username);
+        mav.setViewName("/users/user-private-collection");
+        return mav;
+    }
+
 }
 

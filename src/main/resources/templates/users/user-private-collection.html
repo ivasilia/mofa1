@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>MOFA - Item View</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <th:block th:include="/fragments/nav"></th:block>
+</nav>
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="d-inline-block col-12">
+            <h5 th:text="|User ${username} : private Collection view|"></h5>
+        </div>
+    </div>
+    <div class="row" style="display: inline-block">
+        <div class="col-12">
+            <form th:action="@{/users/private-collection/{username}(username=${username})}" th:method="POST" style="margin-bottom: 30px">
+                <button type="submit" class="btn" style="background-color: #849974; color: #fff; margin-bottom: 10px">
+                    Add an item to your private virtual Collection</button><br>
+                <select id="itemId" th:name="itemId">
+                    <option value="">-- Available items --</option>
+                    <option th:each="item : ${allItems}"
+                            th:value="${item.id}"
+                            th:text="|${item.getName()} ( ${item.getAuthor()} ). -- Item rating: ${item.rating}. -- Status: ${item.status}|"></option>
+                </select>
+            </form>
+        </div>
+        <div class="card-group">
+            <div th:each="i : ${collectedItems}" class="card"
+                 style="width: 18rem; padding: 3px; border-top-color: #849974">
+                <div class="card-group">
+                <img class="card-img-top" th:src="${i.imageUrl}" alt="..." style="max-width: 150px">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${i.name}">...</h5>
+                    <p class="card-text" th:text="${i.getAuthor()}">...</p>
+                    <a class="btn" style="background-color: #849974; color: #fff"
+                       th:href="@{/items/show/{id}(id=${i.id})}">View Item</a>
+                </div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

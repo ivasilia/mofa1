@@ -1,5 +1,7 @@
 package softuni.ivasi.mofa.users.service;
 
+import softuni.ivasi.mofa.collections.models.entities.Item;
+import softuni.ivasi.mofa.collections.models.service.ItemServiceModel;
 import softuni.ivasi.mofa.users.models.bindings.UserRegisterBinding;
 import softuni.ivasi.mofa.users.models.bindings.UserUpdateBinding;
 import softuni.ivasi.mofa.users.models.entities.UserEntity;
@@ -43,4 +45,8 @@ public interface UserService {
     boolean isCurator(String id);
 
     boolean saveUser(UserUpdateBinding userUpdateBinding);
+
+    List<ItemServiceModel> getAllItems(String username);
+
+    void addItemToUser(String itemId, String name);
 }

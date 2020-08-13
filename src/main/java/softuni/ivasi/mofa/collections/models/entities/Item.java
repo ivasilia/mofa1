@@ -4,13 +4,16 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 import softuni.ivasi.mofa.projects.models.entity.Project;
+import softuni.ivasi.mofa.users.models.entities.UserEntity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -47,15 +50,18 @@ public class Item {
 
     private double rating;
 
-    public Item (String name, String author, String imageUrl) {
-        this.name = name;
-        this.author = author;
-        this.imageUrl = imageUrl;
-    }
+    @ManyToMany(mappedBy = "items")
+    private Set<UserEntity> users;
 
     @ManyToOne()
     @JoinColumn(name = "project_id")
     private Project project;
 
     private BigDecimal insurancePrice;
+
+    public Item (String name, String author, String imageUrl) {
+        this.name = name;
+        this.author = author;
+        this.imageUrl = imageUrl;
+    }
 }

@@ -1,6 +1,6 @@
 # mofa - Museum Of Fine Arts
 
-Functionality available for Collections(Departments), Items, Users, Projects. To fill the repositories with sample data, uncomment contents of the main method in ApplicationInit.java
+Functionality available for Collections(Departments), Items, Users, Projects. 
 --------------------------------------------------------------------------------------------------------
 
 UNAUTHORIZED users can:
@@ -16,7 +16,7 @@ CURATOR is authorized:
 to view Collections, Items and Projects,
 to add Items to Collections,
 to remove Items from Collections,
-to add Items to Projects base on their rating.
+to add Items to Projects based on their rating.
 
 ADMIN is authorized:
 to view all USERS,

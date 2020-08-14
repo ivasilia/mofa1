@@ -49,7 +49,7 @@ public class ItemsController {
 
     @PreAuthorize("hasRole('ROLE_CURATOR')")
     @PostMapping("/show/{id}")
-    public ModelAndView postNotesOrAddToPrivateCollection(ModelAndView mav,
+    public ModelAndView postNotes(ModelAndView mav,
                                   Principal principal,
                                   @PathVariable("id") String id,
                                   @RequestParam(value="text") String text) {

@@ -21,4 +21,6 @@ public interface DepartmentService {
     List<String> findByDepartmentIdIsNot(String id);
 
     void save(Department dept1);
+
+    void clearAll();
 }

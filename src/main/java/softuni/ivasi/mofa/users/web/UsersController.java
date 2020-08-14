@@ -63,7 +63,8 @@ public class UsersController {
                                                  @RequestParam("itemId") String itemId) {
 
         this.userService.addItemToUser(itemId, username);
-        System.out.println();
+        this.itemService.increaseRating(itemId);
+
         mav.addObject("allItems", this.itemService.getAllItemDtos());
         mav.addObject("collectedItems", this.userService.getAllItems(username));
         mav.addObject("username", username);

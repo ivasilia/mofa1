@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.bindings.ItemAddBinding;
@@ -23,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +47,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @Scheduled(cron = "0 0 0 * * *")
     public void initialize() throws IOException {
+
         InputStream resource = new ClassPathResource(
                 "files/items.txt").getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
@@ -62,6 +65,7 @@ public class ItemServiceImpl implements ItemService {
             line = reader.readLine();
         }
     }
+
 
     public void registerItem(String[] itemInput) {
         Department department = this.departmentService.getByAbbreviation(itemInput[2]);
@@ -119,7 +123,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @Cacheable("allItemDTOs")
+//    @Cacheable("allItemDTOs")
     public List<ItemServiceModel> getAllItemDtos() {
         return this.itemRepo.findAll().stream()
                 .map(i -> this.modelMapper.map(i, ItemServiceModel.class))
@@ -186,5 +190,14 @@ public class ItemServiceImpl implements ItemService {
         this.itemRepo.saveAndFlush(item);
 
         return assigned;
+    }
+
+    @Override
+    public void increaseRating(String itemId) {
+        Item item = this.itemRepo.findById(itemId).orElse(null);
+        if (item != null) {
+            item.setRating(item.getRating() + 1);
+        }
+        this.itemRepo.saveAndFlush(item);
     }
 }

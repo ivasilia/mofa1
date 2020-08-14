@@ -39,4 +39,6 @@ public interface ItemService {
     void addDepartmentToItem(String name, String id);
 
     boolean addProjectToItem(String name, String projectId);
+
+    void increaseRating(String itemId);
 }

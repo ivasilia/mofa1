@@ -97,7 +97,12 @@
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 			<version>3.0.4.RELEASE</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

@@ -4,17 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.users.models.entities.AuthorityEntity;
 import softuni.ivasi.mofa.users.models.entities.UserEntity;
+import softuni.ivasi.mofa.users.repo.UserRepo;
 import softuni.ivasi.mofa.users.service.AdminService;
 import softuni.ivasi.mofa.users.service.UserService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+
     private final UserService userService;
+    private final UserRepo userRepo;
 
 
     @Autowired
-    public AdminServiceImpl(UserService userService) {
+    public AdminServiceImpl(UserService userService, UserRepo userRepo) {
         this.userService = userService;
+        this.userRepo = userRepo;
     }
 
     @Override
@@ -28,8 +32,12 @@ public class AdminServiceImpl implements AdminService {
             user.getAuthorities().add(curatorAuthority);
             this.userService.saveEntity(user);
         } else {
-            return;    // TODO Custom Role Exists Exception
+            return;    // TODO Custom Role Exists Exception ??
         }
+    }
+
+    public void save(UserEntity user) {
+        this.userRepo.save(user);
     }
 }
 

@@ -39,4 +39,8 @@ public class NotesServiceImpl implements NotesService {
         }
         return notesServiceModel;
     }
+
+    public void saveEntity(Notes notes) {    // FOR TESTS
+        this.notesRepo.save(notes);
+    }
 }

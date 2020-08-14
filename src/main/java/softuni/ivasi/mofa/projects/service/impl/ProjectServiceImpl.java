@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.entities.Item;
 import softuni.ivasi.mofa.collections.service.ItemService;
@@ -42,20 +43,23 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
+    @Async
     public void initializeProjects() throws IOException {
-        InputStream resource = new ClassPathResource(
-                "files/projects.txt")
-                .getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
-        String line = reader.readLine();
+        if (this.projectRepo.findAll().size() == 0) {
+            InputStream resource = new ClassPathResource(
+                    "files/projects.txt")
+                    .getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
+            String line = reader.readLine();
 
-        while (line != null) {
-            String[] projectInput = line.split(": ");
+            while (line != null) {
+                String[] projectInput = line.split(": ");
 
-            Project project = new Project(projectInput[0], projectInput[1], projectInput[2], projectInput[3]);
-            this.projectRepo.save(project);
+                Project project = new Project(projectInput[0], projectInput[1], projectInput[2], projectInput[3]);
+                this.projectRepo.save(project);
 
-            line = reader.readLine();
+                line = reader.readLine();
+            }
         }
     }
 

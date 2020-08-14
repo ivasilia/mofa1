@@ -45,5 +45,9 @@ public class Project {
         this.location = location;
         this.venue = venue;
     }
+
+    public Project(String name) {
+        this.name = name;
+    }
 }
 

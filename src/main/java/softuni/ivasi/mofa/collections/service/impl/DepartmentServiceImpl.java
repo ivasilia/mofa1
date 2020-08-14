@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.entities.Department;
 import softuni.ivasi.mofa.collections.models.service.DepartmentServiceModel;
@@ -30,18 +31,21 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    @Async
     public void initialize() throws IOException {
-        InputStream resource = new ClassPathResource(
-                "files/departments.txt")
-                .getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
-        String line = reader.readLine();
-        while (line != null) {
-            String[] departmentInput = line.split(": ");
-            Department department = new Department(
-                    departmentInput[0], departmentInput[1], departmentInput[2], departmentInput[3]);
-            this.departmentRepo.save(department);
-            line = reader.readLine();
+        if (this.departmentRepo.findAll().size() == 0) {
+            InputStream resource = new ClassPathResource(
+                    "files/departments.txt")
+                    .getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
+            String line = reader.readLine();
+            while (line != null) {
+                String[] departmentInput = line.split(": ");
+                Department department = new Department(
+                        departmentInput[0], departmentInput[1], departmentInput[2], departmentInput[3]);
+                this.departmentRepo.save(department);
+                line = reader.readLine();
+            }
         }
     }
 
@@ -84,6 +88,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void save(Department dept) {
         this.departmentRepo.save(dept);
+    }
+
+    @Override
+    public void clearAll() {
+        this.departmentRepo.deleteAll();
     }
 }
 

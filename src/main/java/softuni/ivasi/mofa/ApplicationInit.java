@@ -31,9 +31,9 @@ public class ApplicationInit implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // TODO -- make asynchronous -- make single run -->>
-//        this.departmentService.initialize(); // Initialize Departments' data
-//        this.itemService.initialize(); // Insert sample Items
-//        this.userService.initializeUsers(); // Insert sample User and ADMIN
-//        this.projectService.initializeProjects(); // Insert sample Projects
+        this.departmentService.initialize(); // Initialize Departments' data
+        this.itemService.initialize(); // Insert sample Items
+        this.userService.initializeUsers(); // Insert sample User and ADMIN
+        this.projectService.initializeProjects(); // Insert sample Projects
     }
 }

@@ -38,10 +38,16 @@ public class UsersController {
                                     Principal principal,
                                     @Valid UserUpdateBinding userUpdateBinding,
                                     BindingResult bindingResult) {
-        mav.addObject("userUpdateBinding", userUpdateBinding);
-        mav.setViewName("/users/profile");
-        mav.addObject("saved", this.userService.saveUser(userUpdateBinding));
+        if (bindingResult.hasErrors()) {
+            mav.addObject("userUpdateBinding", userUpdateBinding);
+        } else {
+            this.userService.saveUser(userUpdateBinding);
+            mav.addObject("saved", true);
+        }
 
+        mav.addObject("userUpdateBinding", userUpdateBinding);
+
+        mav.setViewName("/users/profile");
         return mav;
     }
 

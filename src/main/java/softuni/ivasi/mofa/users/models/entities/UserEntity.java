@@ -38,7 +38,7 @@ public class UserEntity {
     private String password;
 
     @NonNull
-    @Email
+    @Email(message = "Enter valid email address!")
     private String email;
 
     @Length(min = 1, message = "Enter valid first name!")

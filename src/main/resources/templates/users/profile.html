@@ -18,13 +18,18 @@
     <div class="row text-center">
         <div class=" col-12">
             <form class="rounded" th:action="@{/users/profile}" th:method="POST" th:object="${userUpdateBinding}"><br>
+                <small th:each="err : ${#fields.errors('firstName')}" th:text="${err}"></small>
                 <input type="text" th:field="*{firstName}" th:placeholder="*{firstName}" class="input-field"><br>
+
+                <small th:each="err : ${#fields.errors('lastName')}" th:text="${err}"></small>
                 <input type="text" th:field="*{lastName}" placeholder="Last name" class="input-field"><br>
 
                 <small th:each="err : ${#fields.errors('username')}" th:text="${err}"></small>
                 <input type="text" th:field="*{username}" placeholder="User name" class="input-field"><br>
 
+                <small th:each="err : ${#fields.errors('email')}" th:text="${err}"></small>
                 <input type="text" th:field="*{email}" placeholder="Email" class="input-field"><br>
+
                 <input type="text" th:field="*{address}" placeholder="Address" class="input-field"><br>
                 <div class="button-holder d-flex justify-content-center" style="padding-top: 20px">
                     <button type="submit" class="btn btn-secondary mb-3">Submit</button>

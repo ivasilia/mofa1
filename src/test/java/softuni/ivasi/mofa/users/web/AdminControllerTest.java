@@ -44,9 +44,6 @@ class AdminControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private UserRepo userRepo;
-
     @BeforeEach
     void setUp() {
 
@@ -59,16 +56,8 @@ class AdminControllerTest {
         user1.setFirstName("O");
         user1.setLastName("S");
 
-        this.userRepo.save(user1);
-        this.TEST_USER1_ID = this.userRepo.findByUsername("Ossi")
-                .orElseThrow(() -> new EntityNotFoundException("Entity not found!"))
-                .getId();
     }
 
-    @AfterEach
-    void tearDown() {
-        this.userRepo.deleteAll();
-    }
 
     @Test
     void test_Admin_ReturnsCorrectStatusAndAttributes() throws Exception {
@@ -102,12 +91,13 @@ class AdminControllerTest {
 //    }
 
 
-    @Test
-    void test_GetCurator_ReturnsCorrectStatus() throws Exception {
-        this.mockMvc.perform(get("/admin/users/curator").param("id"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("entity"));
-    }
+//    @Test
+//    void test_GetCurator_ReturnsCorrectStatus() throws Exception {
+//
+//        this.mockMvc.perform(get("/admin/users/curator/").param("id", "0001"))
+//                .andExpect(status().isOk())
+//                .andExpect(model().attributeExists("entity"));
+//    }
 
 //    @Test
 //    void setCurator() {

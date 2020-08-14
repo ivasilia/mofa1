@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class ProjectServiceImplTest {
@@ -37,14 +36,9 @@ class ProjectServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        this.testProject = new Project();
+        testProject = new Project();
+        testProject.setId("0001");
         testProject.setName("MyProject");
-
-        this.mockedProjectRepo = mock(ProjectRepo.class);
-        this.mockedProjectRepo.save(this.testProject);
-        this.TEST_PROJECT_ID = this.mockedProjectRepo
-                .findByName("MyProject")
-                .getId();
     }
 
     @AfterEach
@@ -58,15 +52,21 @@ class ProjectServiceImplTest {
 
 
     @Test
-    void getEntityById() {
-//        this.mockedProjectRepo.save(this.testProject);
-//        when(this.mockedProjectService.getEntityById(this.TEST_PROJECT_ID))
-//                .thenReturn(this.testProject);
+    void getEntityById_ReturnsCorrectObject() {
+
+        when(this.mockedProjectService.getEntityById("0001"))
+                .thenReturn(this.testProject);
     }
 
 
     @Test
     void getById() {
+        ProjectServiceModel projectServiceModel = new ProjectServiceModel();
+        projectServiceModel.setName("ProjectModel");
+        projectServiceModel.setId("0002");
+
+        when(this.mockedProjectService.getById("0002"))
+                .thenReturn(projectServiceModel);
     }
 
     @Test
@@ -76,8 +76,6 @@ class ProjectServiceImplTest {
                 new Project("NNN"),
                 new Project("MMM"),
                 new Project("LLL"));
-
-        this.mockedProjectRepo.saveAll(testProjects);
 
         when(this.mockedProjectService.getAll())
                 .thenReturn(List.of(testProjects)
@@ -89,9 +87,15 @@ class ProjectServiceImplTest {
 
     @Test
     void save() {
+        this.mockedProjectService.save(this.testProject);
+        verify(this.mockedProjectService, times(1)).save(this.testProject);
     }
 
     @Test
     void getEntityByName() {
+        this.mockedProjectService.save(this.testProject);
+
+        when(this.mockedProjectService.getEntityByName("MyProject"))
+                .thenReturn(this.testProject);
     }
 }

@@ -187,6 +187,7 @@ class ItemServiceImplTest {
         verify(this.mockedItemService, times(1)).save(any(ItemServiceModel.class));
     }
 
+
     @Test
     void saveEntity_VerifyCalls_AndReturnCorrectEntity() {
         this.mockedItemService.saveEntity(this.testItem);
@@ -195,17 +196,19 @@ class ItemServiceImplTest {
         when(this.mockedItemService.getEntityById("0001")).thenReturn(this.testItem);
     }
 
+
     @Test
     void addDepartmentToItem() {
+        Department department = this.testItem2.getDepartment();
+
         this.mockedItemService.addDepartmentToItem(
-                this.testItem.getName(), this.testItem2.getDepartment().getId());
+                this.testItem.getName(), "222");
 
         verify(this.mockedItemService).addDepartmentToItem(anyString(), anyString());
         verify(this.mockedItemService, times(1))
                 .addDepartmentToItem(anyString(), anyString());
-        when(this.mockedItemService.getEntityById("0001").getDepartment())
-                .thenReturn(this.mockedItemService.getEntityById("0002").getDepartment());
     }
+
 
     @Test
     void saveNotesToItem() {

@@ -5,19 +5,13 @@
     <title>MOFA - Admin Panel </title>
     <th:block th:include="/fragments/head"></th:block>
 </head>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("demo").innerHTML =
-                    this.responseText;
-            }
-        };
-        xhttp.open("GET", "earlymusic-bg.org/files/lipsum.txt", true);
-        xhttp.send();
-    }
+    $(document).ready(function () {
+        $("button").click(function () {
+            $("#document").load("http://vasily.eu");
+        });
+    });
 </script>
 
 <body>
@@ -26,9 +20,10 @@
 </nav>
 <div class="container text-center">
     <div class="row">
-        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded" style="background-color: #c1eaf1; margin-right: 20px">
+        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded"
+             style="background-color: #c1eaf1; margin-right: 20px">
             <h5 class="text-primary">MOFA app statistics<br>
-            (StatsInterceptor)</h5>
+                (StatsInterceptor)</h5>
             <div class="list-group-item rounded" style="border-color:  #0d8499">
                 <ul>
                     <li th:text="|Request count: ${requestCount}|"></li>
@@ -51,9 +46,10 @@
         </div>
     </div>
     <div class="row" style="margin-top: 20px">
-        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded" style="background-color: #c1eaf1; margin-right: 20px">
+        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded"
+             style="background-color: #c1eaf1; margin-right: 20px">
             <h5 class="text-primary">MOFA page statistics<br>
-            (PathInterceptor)</h5>
+                (PathInterceptor)</h5>
             <div class="list-group-item rounded" style="border-color:  #0d8499">
                 <ul>
                     <li th:text="|Projects page viewed ${requestsToProjectsCount} times|"></li>
@@ -62,16 +58,14 @@
                 </ul>
             </div>
         </div>
-        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded" style="background-color: #c1eaf1; margin-right: 20px">
-            <div id="demo">
+        <div class="card-body col-lg-5 col-md-12 col-sm-12 rounded"
+             style="background-color: #c1eaf1; margin-right: 20px">
+            <div id="document">
                 <h5 class="text-primary">AJAX Object</h5>
-                <button type="button" onclick="loadDoc()">Toggle content</button>
+                <button type="button" class="btn-outline-primary rounded">Toggle content</button>
             </div>
         </div>
     </div>
 </div>
-
-
-
 </body>
 </html>

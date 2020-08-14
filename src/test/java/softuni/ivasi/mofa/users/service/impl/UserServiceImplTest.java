@@ -40,6 +40,12 @@ class UserServiceImplTest {
             setId("0001");
             setUsername("Hammurapi");
         }};
+
+        this.userUpdateBinding = new UserUpdateBinding() {{
+            setId("1000");
+            setUsername("Binding");
+        }};
+
         this.mockedUserRepo = mock(UserRepo.class);
         this.mockedUserService.saveEntity(this.testUser);
     }
@@ -79,18 +85,21 @@ class UserServiceImplTest {
 
 
     // TODO  solve modelmapper problem with UserUpdateBinding -->>
-//    @Test
-//    void findBindingById() {
-//        this.mockedUserRepo.save(this.testUser);
-//        when(this.mockedUserService
-//                .findBindingById("0001"))
-//                .thenReturn(
-//                        this.modelMapper.map(this.testUser, UserUpdateBinding.class));
-//    }
-//
-//    @Test
-//    void findBindingByUsername() {
-//    }
+    @Test
+    void findBindingById_RetunsCorrectBinding() {
+
+        when(this.mockedUserService
+                .findBindingById("1000"))
+                .thenReturn(this.userUpdateBinding);
+    }
+
+    @Test
+    void findBindingByUsername_RetunsCorrectBinding() {
+
+        when(this.mockedUserService
+                .findBindingByUsername("Bagratuni"))
+                .thenReturn(this.userUpdateBinding);
+    }
 
     @Test
     void register_IsExecuted() {

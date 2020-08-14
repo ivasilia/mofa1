@@ -48,13 +48,9 @@ class AdminServiceImplTest {
     @Test
     void setCurator() {
 
-        AuthorityEntity curatorAuthority = new AuthorityEntity();
-        curatorAuthority.setName("ROLE_CURATOR");
-        curatorAuthority.setUser(this.testUser);
-        this.testUser.getAuthorities().add(curatorAuthority);
-
         this.mockedAdminService.setCurator("0001");
-        verify(this.mockedAdminService, times(2))
-                .setCurator(TEST_USER_ID);
+
+        verify(this.mockedAdminService, times(1))
+                .setCurator("0001");
     }
 }

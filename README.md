@@ -1,6 +1,6 @@
 # mofa - Museum Of Fine Arts
 
-Functionality available for Collections(Departments), Items, Users, Projects. 
+Functionality available for Collections(Departments), Items, Users, Projects and Ticket sales. 
 --------------------------------------------------------------------------------------------------------
 
 UNAUTHORIZED users can:

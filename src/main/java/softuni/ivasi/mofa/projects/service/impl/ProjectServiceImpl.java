@@ -55,7 +55,8 @@ public class ProjectServiceImpl implements ProjectService {
             while (line != null) {
                 String[] projectInput = line.split(": ");
 
-                Project project = new Project(projectInput[0], projectInput[1], projectInput[2], projectInput[3]);
+                Project project = new Project(projectInput[0], projectInput[1], projectInput[2],
+                        this.venuesRepo.findByName(projectInput[3]));
                 this.projectRepo.save(project);
 
                 line = reader.readLine();

@@ -29,13 +29,14 @@
     <div class="row justify-content-center" style="margin-top: 20px">
         <div th:each="p : ${projects}" class="card-group">
             <div class="card" style="width: 18rem; padding: 3px; border-top-color: #849974">
-                <img class="card-img-top img-thumbnail" th:src="*{p.imageUrl}" alt="Cover Image">
+                <img class="card-img-top img-thumbnail" th:src="*{p.getImageUrlThumbnail()}" alt="Cover Image">
                 <div class="card-body">
                     <h5 class="card-title" th:text="*{p.name}">...</h5>
                     <p class="card-text" th:text="*{p.description}">...</p>
                     <a sec:authorize="hasRole('ROLE_USER')" class="btn" style="background-color: #849974; color: #fff"
                        th:href="@{projects/show/{id}(id=${p.id})}">View Project</a><br>
-                    <a sec:authorize="hasRole('ROLE_CURATOR')" class="btn" style="background-color: #849974; color: #fff"
+                    <a sec:authorize="hasRole('ROLE_CURATOR')" class="btn"
+                       style="background-color: #849974; color: #fff; margin-top: 20px"
                        th:href="@{projects/show/{id}(id=${p.id})}">Edit Project</a><br>
                 </div>
             </div>

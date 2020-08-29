@@ -23,10 +23,15 @@ public class ProjectServiceModel {
     private String name;
     private ProjectStatus projectStatus;
     private String imageUrl;
+    private String imageUrlThumbnail;
     private String description;
     private String location;
     private String venue;
     private LocalDate startingDate;
     private LocalDate endDate;
     private Set<Item> items;
+
+    public String getImageUrlThumbnail() {
+        return imageUrl.substring(0, imageUrl.length()-4) + "_thumbnail" + ".jpg";
+    }
 }

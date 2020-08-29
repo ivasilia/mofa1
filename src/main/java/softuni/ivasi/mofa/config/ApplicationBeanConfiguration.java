@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import softuni.ivasi.mofa.security.CustomSuccessHandler;
 
+import java.util.Random;
+
 @Configuration
 @EnableCaching
 public class ApplicationBeanConfiguration {
@@ -26,4 +28,10 @@ public class ApplicationBeanConfiguration {
     public CustomSuccessHandler authSuccessHandler(){
         return new CustomSuccessHandler();
     }
+
+    @Bean
+    public Random random() {
+        return new Random();
+    }
+
 }

@@ -22,10 +22,6 @@ public class UserUpdateBinding {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @NotNull
-    @Length(min = 4, max = 255, message = "Password must contain minimum 4 characters")
-    private String password;
-
     @NonNull
     @Email
     private String email;

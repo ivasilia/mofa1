@@ -11,8 +11,14 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DepartmentServiceModel {
+    private String id;
     private String name;
     private String description;
     private String imageUrl;
+    private String imageUrlThumbnail;
     private Set<Item> items;
+
+    public String getImageUrlThumbnail() {
+        return imageUrl.substring(0, imageUrl.length()-4) + "_thumbnail" + ".jpg";
+    }
 }

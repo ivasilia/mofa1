@@ -37,6 +37,9 @@ public class Item {
     @Column(nullable = false)
     private String imageUrl;
 
+    @Transient
+    private String imageUrlThumbnail;
+
     @ManyToOne()
     private Department department;
 
@@ -63,5 +66,9 @@ public class Item {
         this.name = name;
         this.author = author;
         this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrlThumbnail() {
+        return imageUrl.substring(0, imageUrl.length()-4) + "_thumbnail" + ".jpg";
     }
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:include="/fragments/head"></th:block>
+</head>
+
+<body>
+<th:block th:include="/fragments/featured"></th:block>
+
+<div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <th:block th:include="/fragments/nav"></th:block>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12 d-inline-block">
+            <h5 th:text="|Thanks for your purchase, ${#authentication.name}|"></h5>
+            <div style="margin-top: 30px">
+                <div th:each="ticket : ${session.lastSoldTickets}"
+                     th:text="|Successfully bought ticket: ${ticket.getTicketType()},
+                     Price: ${ticket.getPrice()}, ticket ID: ${ticket.id}|"
+                     class="col-12 bg-success text-light">
+                </div>
+            </div>
+            <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
+                    data-target="#collapsedAllTickets" aria-expanded="false"
+                    aria-controls="collapsedAllTickets" style="margin-top: 30px">
+                Show/Hide all your purchases history:
+            </button>
+            <div style="margin-top: 30px" th:each="ticket : ${allSoldTickets}">
+                <table class="table-striped collapse" id="collapsedAllTickets"
+                       style="background-color: white; background-blend-mode: soft-light">
+                    <tr>
+                        <td>
+                            <span th:text="|Ticket: ${ticket.getTicketType()}|"></span>
+                        </td>
+                        <td>
+                            <span th:text="|Price: ${ticket.getPrice()}|"></span>
+                        </td>
+                        <td>
+                            <span th:text="|Ticket ID: ${ticket.id}|"></span>
+                        </td>
+                        <td>
+                            <span th:text="|Sold on: ${ticket.soldOn}|"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <a class="btn btn-outline-primary" type="button" th:href="@{/sales}" style="margin-top: 30px">
+                Return to the ticket desk
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

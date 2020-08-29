@@ -6,4 +6,5 @@ import softuni.ivasi.mofa.projects.models.entity.Venue;
 
 @Repository
 public interface VenuesRepo extends JpaRepository<Venue, String> {
+    Venue findByName(String name);
 }

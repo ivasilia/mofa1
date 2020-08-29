@@ -10,7 +10,7 @@ public interface DepartmentService {
     void initialize() throws IOException;
     Department getByName(String name);
 
-    List<Department> findAll();
+    List<DepartmentServiceModel> findAll();
 
     Department getDepartmentById(String id);
 

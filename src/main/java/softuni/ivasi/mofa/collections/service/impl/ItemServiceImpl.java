@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.bindings.ItemAddBinding;
@@ -24,7 +23,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +35,10 @@ public class ItemServiceImpl implements ItemService {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public ItemServiceImpl(ItemRepo itemRepo, DepartmentService departmentService, ProjectService projectService, ModelMapper modelMapper) {
+    public ItemServiceImpl(ItemRepo itemRepo,
+                           DepartmentService departmentService,
+                           ProjectService projectService,
+                           ModelMapper modelMapper) {
         this.itemRepo = itemRepo;
         this.departmentService = departmentService;
         this.projectService = projectService;
@@ -70,6 +71,9 @@ public class ItemServiceImpl implements ItemService {
     public void registerItem(String[] itemInput) {
         Department department = this.departmentService.getByAbbreviation(itemInput[2]);
         Item item = new Item(itemInput[0], itemInput[1], itemInput[3]);
+        //TODO Cloudinary image upload
+//        MultipartFile image = itemInput[3];
+//        String url = this.cloudinaryService.uploadImage();
         item.setDepartment(department);
         this.itemRepo.save(item);
     }

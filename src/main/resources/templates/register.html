@@ -25,8 +25,8 @@
             <input type="text" th:field="*{email}" placeholder="Email" class="input-field"><br>
 
             <small th:each="err : ${#fields.errors('password')}" th:text="${err}"></small><br>
-            <input type="text" th:field="*{password}" placeholder="Password" class="input-field"><br>
-            <input type="text" th:field="*{confirmPassword}" placeholder="Confirm password" class="input-field">
+            <input type="password" th:field="*{password}" placeholder="Password" class="input-field"><br>
+            <input type="password" th:field="*{confirmPassword}" placeholder="Confirm password" class="input-field">
             <div class="button-holder d-flex justify-content-center" style="padding-top: 20px">
                 <button type="submit" class="btn btn-secondary mb-3">Submit</button>
             </div>

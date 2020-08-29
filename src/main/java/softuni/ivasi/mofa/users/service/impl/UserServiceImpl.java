@@ -8,15 +8,18 @@ import org.springframework.stereotype.Service;
 import softuni.ivasi.mofa.collections.models.entities.Item;
 import softuni.ivasi.mofa.collections.models.service.ItemServiceModel;
 import softuni.ivasi.mofa.collections.service.ItemService;
+import softuni.ivasi.mofa.sales.models.entity.Ticket;
 import softuni.ivasi.mofa.users.models.bindings.UserRegisterBinding;
 import softuni.ivasi.mofa.users.models.bindings.UserUpdateBinding;
 import softuni.ivasi.mofa.users.models.entities.AuthorityEntity;
 import softuni.ivasi.mofa.users.models.entities.UserEntity;
+import softuni.ivasi.mofa.users.models.service.UserIdServiceModel;
 import softuni.ivasi.mofa.users.models.service.UserServiceModel;
 import softuni.ivasi.mofa.users.repo.UserRepo;
 import softuni.ivasi.mofa.users.service.UserService;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -179,6 +182,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserIdServiceModel getIdServiceModel(String name) {
+        return this.modelMapper.map(
+                this.userRepo.findByUsername(name).orElse(null),
+                UserIdServiceModel.class);
+    }
+
+    @Override
     public void setActive(UserUpdateBinding userUpdateBinding) {
         UserEntity user = this.userRepo.findById(userUpdateBinding.getId()).orElseThrow(
                 () -> new EntityNotFoundException("No user with such username"));
@@ -201,6 +211,8 @@ public class UserServiceImpl implements UserService {
         user.getItems().add(item);
         this.userRepo.saveAndFlush(user);
     }
+
+
 
     @Override
     public boolean isCurator(String id) {
@@ -231,6 +243,7 @@ public class UserServiceImpl implements UserService {
         user.setAddress(userUpdateBinding.getAddress());
 
         this.userRepo.saveAndFlush(user);
+
         return saved;
     }
 

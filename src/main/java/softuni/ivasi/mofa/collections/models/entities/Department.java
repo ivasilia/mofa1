@@ -45,6 +45,14 @@ public class Department {     // Department is used for Collections in the templ
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
 
+    @Transient
+    private String imageUrlThumbnail;
+
     @OneToMany(mappedBy = "department")
     private Set<Item> items = new HashSet<>();
+
+
+    public String getImageUrlThumbnail() {
+        return imageUrl.substring(0, imageUrl.length()-4) + "_thumbnail" + ".jpg";
+    }
 }

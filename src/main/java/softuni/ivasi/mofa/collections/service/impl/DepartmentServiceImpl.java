@@ -56,8 +56,12 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Cacheable("allDepartments")
-    public List<Department> findAll() {
-        return this.departmentRepo.findAll();
+    public List<DepartmentServiceModel> findAll() {
+        return this.departmentRepo.findAll()
+                .stream()
+                .map(d -> this.modelMapper.map(
+                        d, DepartmentServiceModel.class))
+                .collect(Collectors.toList());
     }
 
     @Override

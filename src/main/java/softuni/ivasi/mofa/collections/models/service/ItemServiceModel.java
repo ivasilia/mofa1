@@ -17,8 +17,13 @@ public class ItemServiceModel {
     private String author;
     private String description;
     private String imageUrl;
+    private String imageUrlThumbnail;
     private LocalDateTime registeredOn;
     private ItemStatus status;
     private String departmentId;
     private double rating;
+
+    public String getImageUrlThumbnail() {
+        return imageUrl.substring(0, imageUrl.length()-4) + "_thumbnail" + ".jpg";
+    }
 }

@@ -6,4 +6,6 @@ import java.math.BigDecimal;
 
 public interface SalesService {
     BigDecimal getSalesByType(TicketType type);
+
+    long getSalesCountByType(TicketType type);
 }

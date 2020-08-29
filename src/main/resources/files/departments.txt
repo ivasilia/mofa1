@@ -1,4 +1,4 @@
-Dutch and Flemish Masters: Includes masterpieces from the Low Countries.: images/baudouin.webp: DFL
+Dutch and Flemish Masters: Includes masterpieces from the Low Countries.: images/baudouin.jpg: DFL
 French Painting of the 19th century: Everything you want to find in a painting.: images/cezanne.jpg: FR
 Russian Art and History: Collections of miscellaneous paintings and art from the 18th to the 20th century.: images/porcelain.jpg: RU
 Balkan Art and History: Collections of miscellaneous artworks of different historic periods from the Balkan region.: images/rhyton.jpg: BAL

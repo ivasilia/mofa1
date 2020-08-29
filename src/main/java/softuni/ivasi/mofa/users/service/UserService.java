@@ -5,6 +5,7 @@ import softuni.ivasi.mofa.collections.models.service.ItemServiceModel;
 import softuni.ivasi.mofa.users.models.bindings.UserRegisterBinding;
 import softuni.ivasi.mofa.users.models.bindings.UserUpdateBinding;
 import softuni.ivasi.mofa.users.models.entities.UserEntity;
+import softuni.ivasi.mofa.users.models.service.UserIdServiceModel;
 import softuni.ivasi.mofa.users.models.service.UserServiceModel;
 
 import java.util.List;
@@ -49,4 +50,6 @@ public interface UserService {
     List<ItemServiceModel> getAllItems(String username);
 
     void addItemToUser(String itemId, String name);
+
+    UserIdServiceModel getIdServiceModel(String name);
 }

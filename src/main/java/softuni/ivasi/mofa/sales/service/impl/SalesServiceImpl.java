@@ -19,4 +19,9 @@ public class SalesServiceImpl implements SalesService {
     public BigDecimal getSalesByType(TicketType type) {
         return this.salesRepo.findByType(type).getAmount();
     }
+
+    @Override
+    public long getSalesCountByType(TicketType type) {
+        return this.salesRepo.countAllByType(type);
+    }
 }

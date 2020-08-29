@@ -34,12 +34,15 @@ public class Project {
     private String imageUrl;
     private String description;
     private String location;
-    private String venue;
+
+    @ManyToOne
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
     private LocalDate startingDate;
     private LocalDate endDate;
     private BigDecimal price;
 
-    public Project(String name, String imageUrl, String location, String venue) {
+    public Project(String name, String imageUrl, String location, Venue venue) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.location = location;

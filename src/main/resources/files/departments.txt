@@ -4,3 +4,4 @@ Russian Art and History: Collections of miscellaneous paintings and art from the
 Balkan Art and History: Collections of miscellaneous artworks of different historic periods from the Balkan region.: images/rhyton.jpg: BAL
 Spanish painting: Collections of miscellaneous paintings from Iberian Peninsula: images/elgreco-toledo.jpg: SP
 Middle-Asian And Persian Art: Artworks from different periods: images/persian-dagger.jpg: MAP
+Italian Painting: Just a few of them...: images/miracle-tintoretto.jpg: IT

@@ -108,6 +108,13 @@
 			<artifactId>cloudinary-core</artifactId>
 			<version>1.26.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44 -->
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.26.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

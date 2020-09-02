@@ -1,7 +1,7 @@
 Lunchone on the Grass: Edouard Manet: FR: /images/manet-luncheon.jpg
 A Peasant Family: Pavel Filonov: RU: /images/filonov-peasant-family.jpg
 The Burning of the Houses of Lords and Commons: William Turner: EN: /images/turner-burning.jpg
-Night Watch: Rembrandt van Rijn: DFL: /images/night-watch.jpg
+Night Watch: Rembrandt van Rijn: DFL: https://res.cloudinary.com/duvtwfpom/image/upload/v1598873552/samples/mofa/images/night-watch.jpg
 View of Toledo: El Greco: SP: /images/elgreco-toledo.jpg
 Miracle of the Slave: Tintoretto: IT: /images/miracle-tintoretto.jpg
 Gypsy Woman: Vladimir Dimitrov The Master: BAL: /images/maistora-gypsy-woman.jpg

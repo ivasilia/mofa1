@@ -6,7 +6,9 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import softuni.ivasi.mofa.cloudinary.CloudinaryService;
 import softuni.ivasi.mofa.collections.models.bindings.ItemAddBinding;
+import softuni.ivasi.mofa.collections.models.bindings.ItemAddCloudBinding;
 import softuni.ivasi.mofa.collections.models.bindings.NotesAddBinding;
 import softuni.ivasi.mofa.collections.models.entities.Department;
 import softuni.ivasi.mofa.collections.models.entities.Item;
@@ -32,16 +34,17 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRepo itemRepo;
     private final DepartmentService departmentService;
     private final ProjectService projectService;
+    private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
     @Autowired
     public ItemServiceImpl(ItemRepo itemRepo,
                            DepartmentService departmentService,
-                           ProjectService projectService,
-                           ModelMapper modelMapper) {
+                           ProjectService projectService, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.itemRepo = itemRepo;
         this.departmentService = departmentService;
         this.projectService = projectService;
+        this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
 
@@ -78,12 +81,15 @@ public class ItemServiceImpl implements ItemService {
         this.itemRepo.save(item);
     }
 
-    public void registerItem(ItemAddBinding itemAddBinding) {
-        Item item = this.modelMapper.map(itemAddBinding, Item.class);
+    public void addItem(@Valid ItemAddCloudBinding itemAddCloudBinding) throws IOException {
+        Item item = this.modelMapper.map(itemAddCloudBinding, Item.class);
 
         Department department = this.departmentService.getByAbbreviation(
-                itemAddBinding.getDepartmentId());
+                itemAddCloudBinding.getDepartmentId());
         item.setDepartment(department);
+
+        String url = this.cloudinaryService.uploadImage(itemAddCloudBinding.getImage());
+        item.setImageUrl(url);
 
         this.itemRepo.save(item);
     }
@@ -125,6 +131,11 @@ public class ItemServiceImpl implements ItemService {
                         i, ItemServiceModel.class))
                 .collect(Collectors.toList());
     }
+
+//    @Override
+//    public void registerItem(ItemAddBinding itemAddBinding) {
+//
+//    }
 
     @Override
 //    @Cacheable("allItemDTOs")

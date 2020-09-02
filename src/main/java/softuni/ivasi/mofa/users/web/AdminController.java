@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.ivasi.mofa.collections.models.bindings.ItemAddBinding;
+import softuni.ivasi.mofa.collections.models.bindings.ItemAddCloudBinding;
 import softuni.ivasi.mofa.collections.service.ItemService;
 import softuni.ivasi.mofa.common.statistics.PathService;
 import softuni.ivasi.mofa.common.statistics.StatsService;
@@ -15,6 +16,7 @@ import softuni.ivasi.mofa.users.service.AdminService;
 import softuni.ivasi.mofa.users.service.UserService;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin")
@@ -107,22 +109,22 @@ public class AdminController {
 
     @GetMapping("/items/add")
     public String addItems(Model model) {
-        if (!model.containsAttribute("itemAddBinding")) {
-            model.addAttribute("itemAddBinding", new ItemAddBinding());
+        if (!model.containsAttribute("itemAddCloudBinding")) {
+            model.addAttribute("itemAddCloudBinding", new ItemAddBinding());
         }
         return "/admin/add-item";
     }
 
     @PostMapping("/items/add")
     public ModelAndView addItemConfirm(ModelAndView mav,
-                                       @Valid ItemAddBinding itemAddBinding,
-                                       BindingResult bindingResult) {
+                                       @Valid ItemAddCloudBinding itemAddCloudBinding,
+                                       BindingResult bindingResult) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            mav.addObject("itemAddBinding", itemAddBinding);
+            mav.addObject("itemAddCloudBinding", itemAddCloudBinding);
             mav.setViewName("/admin/add-item");
         } else {
-            this.itemService.registerItem(itemAddBinding);
+            this.itemService.addItem(itemAddCloudBinding);
             mav.setViewName("redirect:/admin/items");
         }
         return mav;

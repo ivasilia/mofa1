@@ -1,6 +1,7 @@
 package softuni.ivasi.mofa.collections.service;
 
 import softuni.ivasi.mofa.collections.models.bindings.ItemAddBinding;
+import softuni.ivasi.mofa.collections.models.bindings.ItemAddCloudBinding;
 import softuni.ivasi.mofa.collections.models.bindings.NotesAddBinding;
 import softuni.ivasi.mofa.collections.models.entities.Item;
 import softuni.ivasi.mofa.collections.models.service.ItemServiceModel;
@@ -22,7 +23,7 @@ public interface ItemService {
 
     List<ItemServiceModel> getAllProjectItems(String projectId);
 
-    void registerItem(ItemAddBinding itemAddBinding);
+//    void registerItem(ItemAddBinding itemAddBinding);
 
     void registerItem(String[] itemInput);
 
@@ -41,4 +42,6 @@ public interface ItemService {
     boolean addProjectToItem(String name, String projectId);
 
     void increaseRating(String itemId);
+
+    void addItem(ItemAddCloudBinding itemAddCloudBinding) throws IOException;
 }

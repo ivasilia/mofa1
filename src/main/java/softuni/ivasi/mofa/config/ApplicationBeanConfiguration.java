@@ -1,5 +1,6 @@
 package softuni.ivasi.mofa.config;
 
+import com.cloudinary.Cloudinary;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;

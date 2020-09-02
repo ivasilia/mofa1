@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import softuni.ivasi.mofa.collections.models.bindings.ItemAddBinding;
+import softuni.ivasi.mofa.collections.models.bindings.ItemAddCloudBinding;
 import softuni.ivasi.mofa.collections.models.bindings.NotesAddBinding;
 import softuni.ivasi.mofa.collections.models.entities.Department;
 import softuni.ivasi.mofa.collections.models.entities.Item;
@@ -17,6 +18,7 @@ import softuni.ivasi.mofa.collections.models.service.ItemServiceModel;
 import softuni.ivasi.mofa.collections.repo.ItemRepo;
 import softuni.ivasi.mofa.projects.models.entity.Project;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,15 +86,15 @@ class ItemServiceImplTest {
 
 
     @Test
-    void testRegisterItem() {
-        ItemAddBinding itemAddBinding = new ItemAddBinding();
-        itemAddBinding.setName("NewItem");
-        this.mockedItemService.registerItem(itemAddBinding);
+    void testAddItem() throws IOException {
+        ItemAddCloudBinding itemAddCloudBinding = new ItemAddCloudBinding();
+        itemAddCloudBinding.setName("NewItem");
+        this.mockedItemService.addItem(itemAddCloudBinding);
 
         verify(this.mockedItemService, times(1))
-                .registerItem(itemAddBinding);
+                .addItem(itemAddCloudBinding);
         when(this.mockedItemRepo.findByName("NewItem"))
-                .thenReturn(this.modelMapper.map(itemAddBinding, Item.class));
+                .thenReturn(this.modelMapper.map(itemAddCloudBinding, Item.class));
     }
 
 

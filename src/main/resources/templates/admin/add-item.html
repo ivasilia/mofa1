@@ -15,29 +15,30 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <form th:action="@{/admin/items/add}" th:method="POST" th:object="${itemAddBinding}" class="form-group">
+            <form th:action="@{/admin/items/add}" th:method="POST" th:object="${itemAddCloudBinding}"
+                  class="form-group" enctype="multipart/form-data">
 
-                <label for="name">Name</label><br>
+                <label for="name">Name</label>
                 <small th:each="err : ${#fields.errors('name')}" th:text="${err}" class="alert-danger"></small><br>
                 <input id="name" class="form-control" type="text" th:field="*{name}"><br>
 
-                <label for="author">Author</label><br>
+                <label for="author">Author</label>
                 <small th:each="err : ${#fields.errors('author')}" th:text="${err}" class="alert-danger"></small><br>
                 <input id="author" class="form-control" type="text" th:field="*{author}"><br>
 
-                <label for="description">Description</label><br>
+                <label for="description">Description</label>
                 <small th:each="err : ${#fields.errors('description')}" th:text="${err}"></small><br>
                 <input id="description" class="form-control" type="text" th:field="*{description}"><br>
 
-                <label for="imageUrl">Image url</label><br>
-                <small th:each="err : ${#fields.errors('imageUrl')}" th:text="${err}" class="alert-danger"></small><br>
-                <input id="imageUrl" class="form-control" type="text" th:field="*{imageUrl}"><br>
-
-                <label for="departmentId">Department</label><br>
+                <label for="departmentId">Department</label>
                 <small th:each="err : ${#fields.errors('departmentId')}" th:text="${err}"></small><br>
                 <input id="departmentId" class="form-control" type="text" th:field="*{departmentId}"><br>
 
-                <button type="submit" class="btn-outline-primary rounded">Register Item</button>
+                <label for="imageUrl">Upload image: </label>
+                <!--                <small th:each="err : ${#fields.errors('imageUrl')}" th:text="${err}" class="alert-danger"></small><br>-->
+                <input id="imageUrl"  type="file" name="image" class="form-control-file"><br>
+
+                <button type="submit" class="btn-outline-primary rounded" style="margin-top: 30px">Register Item</button>
             </form>
         </div>
     </div>

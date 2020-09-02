@@ -1,6 +1,6 @@
 # mofa - Museum Of Fine Arts
 
-Functionality available for Collections(Departments), Items, Users, Projects. 
+Functionality available for Collections(Departments), Items, Users, Projects and Ticket sales. 
 --------------------------------------------------------------------------------------------------------
 
 UNAUTHORIZED users can:
@@ -9,6 +9,7 @@ register.
 
 USER is authorized:
 to view Collections, Items and Projects,
+to buy Tickets and to view the history of purchases,
 to add Items to private list,
 to change his/her/its own profile data.
 

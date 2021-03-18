@@ -1,6 +1,6 @@
 # mofa - Museum Of Fine Arts 
 
-Spring Boot / Thymeleaf
+Spring Boot / MySQL / Thymeleaf
 
 Functionality available for Collections(Departments), Items, Users, Projects and Ticket sales. 
 --------------------------------------------------------------------------------------------------------

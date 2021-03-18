@@ -1,4 +1,6 @@
-# mofa - Museum Of Fine Arts
+# mofa - Museum Of Fine Arts 
+
+Spring Boot / Thymeleaf
 
 Functionality available for Collections(Departments), Items, Users, Projects and Ticket sales. 
 --------------------------------------------------------------------------------------------------------
